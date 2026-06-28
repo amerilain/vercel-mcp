@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+vercel_mcp.py
+vercel_mcp.egg-info/PKG-INFO
+vercel_mcp.egg-info/SOURCES.txt
+vercel_mcp.egg-info/dependency_links.txt
+vercel_mcp.egg-info/entry_points.txt
+vercel_mcp.egg-info/top_level.txt

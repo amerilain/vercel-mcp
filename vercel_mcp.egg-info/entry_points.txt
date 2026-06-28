@@ -1,0 +1,2 @@
+[console_scripts]
+vercel-mcp = vercel_mcp:main

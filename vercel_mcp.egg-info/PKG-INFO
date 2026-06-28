@@ -1,3 +1,20 @@
+Metadata-Version: 2.4
+Name: vercel-mcp
+Version: 0.1.0
+Summary: MCP + HTTP server for Vercel REST API. Manage projects, deployments, domains, and env vars. Zero dependencies.
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/amerilain/vercel-mcp
+Project-URL: Repository, https://github.com/amerilain/vercel-mcp
+Project-URL: Issues, https://github.com/amerilain/vercel-mcp/issues
+Keywords: mcp,vercel,deployments,model-context-protocol,devops
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: Environment :: Console
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+
 # vercel-mcp 🚀
 
 **MCP Server for the Vercel REST API** — Manage projects, deployments, domains, environment variables, and teams from any MCP-compatible client (Claude Desktop, OpenClaw, Cursor, etc.).
@@ -14,7 +31,7 @@
 - **Secrets** — List account-level secrets
 - **Dual-mode** — Run as stdio MCP server or standalone HTTP REST API
 
-### 13 Tools
+### 12 Tools
 
 | Tool | Description |
 |------|-------------|
