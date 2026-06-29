@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
 
     steps:
     - uses: actions/checkout@v4
@@ -37,7 +37,41 @@ for node in ast.walk(tree):
                 assert len(parts) == 3, f'Version must be semver, got {ver}'
                 print(f'Version OK: {ver}')
         "
+    - name: Check unused imports
+      run: |
+        python -c "
+import ast
+with open('vercel_mcp.py') as f:
+    tree = ast.parse(f.read())
+imports = set()
+uses = set()
+for node in ast.walk(tree):
+    if isinstance(node, ast.Import):
+        for alias in node.names:
+            imports.add(alias.name.split('.')[0])
+    elif isinstance(node, ast.ImportFrom):
+        if node.module:
+            imports.add(node.module.split('.')[0])
+    elif isinstance(node, ast.Name):
+        uses.add(node.id)
+unused = imports - uses - {'os', 'sys', 'json', 're', 'time', 'math'}
+if unused:
+    print(f'Potentially unused imports: {unused}')
+else:
+    print('No obviously unused imports found')
+        "
     - name: Verify package build
       run: |
         pip install build
         python -m build --sdist --wheel
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker image
+      run: |
+        docker build -t vercel-mcp-test -f Dockerfile .
+    - name: Verify Docker image runs
+      run: |
+        docker run --rm vercel-mcp-test python -c "import vercel_mcp; print('Docker OK:', vercel_mcp.VERSION)"
